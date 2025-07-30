@@ -1,11 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { FaBell, FaCog, FaUser } from 'react-icons/fa';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../context/AuthContext';
 
 const Navbar = () => {
   const [showNotifications, setShowNotifications] = useState(false);
   const [showProfileMenu, setShowProfileMenu] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
+  const { logout } = useContext(AuthContext);
 
   const getPageTitle = () => {
     switch (location.pathname) {
@@ -46,6 +49,11 @@ const Navbar = () => {
     setShowNotifications(false); // Close notifications if open
   };
 
+  const handleLogout = () => {
+    logout();
+    navigate('/login');
+  };
+
   return (
     <nav className="bg-gray-800 text-white p-4 sticky top-0 z-50">
       <div className="container mx-auto flex justify-between items-center">
@@ -70,7 +78,7 @@ const Navbar = () => {
                 <div className="px-4 py-2 font-bold border-b border-gray-200">John Doe</div>
                 <Link to="/profile" className="block px-4 py-2 hover:bg-gray-100" onClick={toggleProfileMenu}>Profile</Link>
                 <Link to="/settings" className="block px-4 py-2 hover:bg-gray-100" onClick={toggleProfileMenu}>Settings</Link>
-                <a href="#logout" className="block px-4 py-2 hover:bg-gray-100">Logout</a>
+                <button onClick={handleLogout} className="block w-full text-left px-4 py-2 hover:bg-gray-100">Logout</button>
               </div>
             )}
           </div>
