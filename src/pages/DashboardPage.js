@@ -1,7 +1,7 @@
 import React from 'react';
-import StatCardsContainer from '../components/StatCardsContainer';
-import ChartComponent from '../components/ChartComponent';
-import TableComponent from '../components/TableComponent';
+import StatCardsContainer from '../components/common/StatCardsContainer';
+import ChartComponent from '../components/common/ChartComponent';
+import TableComponent from '../components/common/TableComponent';
 
 const DashboardPage = () => {
   return (

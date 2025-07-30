@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { FaBell, FaCog, FaUser } from 'react-icons/fa';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { AuthContext } from '../../context/AuthContext';
+import { AuthContext } from '../context/AuthContext';
 
 const Navbar = () => {
   const [showNotifications, setShowNotifications] = useState(false);
