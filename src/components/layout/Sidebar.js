@@ -1,35 +1,60 @@
 import React from 'react';
-import { FaTachometerAlt, FaUsers, FaBox, FaCog, FaQuestionCircle, FaCalendarAlt, FaUsersCog, FaEnvelope, FaChevronLeft, FaChevronRight, FaTicketAlt, FaExchangeAlt } from 'react-icons/fa';
+import {
+  FaTachometerAlt, FaUsers, FaBox, FaCog, FaQuestionCircle,
+  FaCalendarAlt, FaUsersCog, FaEnvelope, FaTicketAlt, FaExchangeAlt
+} from 'react-icons/fa';
+import { FiMenu } from "react-icons/fi";
+import { IoClose } from "react-icons/io5";
 import { Link, useLocation } from 'react-router-dom';
 import './Sidebar.css';
 
 const Sidebar = ({ isCollapsed, toggleSidebar }) => {
   const location = useLocation();
 
+  const menuItems = [
+    { path: '/', label: 'Dashboard', icon: <FaTachometerAlt /> },
+    { path: '/users', label: 'Users', icon: <FaUsers /> },
+    { path: '/orders', label: 'Orders', icon: <FaBox /> },
+    { path: '/settings', label: 'Settings', icon: <FaCog /> },
+    { path: '/faq', label: 'FAQ Page', icon: <FaQuestionCircle /> },
+    { path: '/calendar', label: 'Calendar', icon: <FaCalendarAlt /> },
+    { path: '/team', label: 'Manage Team', icon: <FaUsersCog /> },
+    { path: '/contact', label: 'Contact Information', icon: <FaEnvelope /> },
+    { path: '/tickets', label: 'Support Tickets', icon: <FaTicketAlt /> },
+    { path: '/transactions', label: 'Transactions', icon: <FaExchangeAlt /> },
+  ];
+
   return (
     <div className={`sidebar ${isCollapsed ? 'collapsed' : ''}`}>
       <div className="toggle-button" onClick={toggleSidebar}>
-        {isCollapsed ? <FaChevronRight /> : <FaChevronLeft />}
+        {isCollapsed ? <FiMenu /> : <IoClose />}
       </div>
+
       {!isCollapsed && (
         <div className="profile">
-          <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Profile" className="profile-img" />
+          <img
+            src="https://randomuser.me/api/portraits/men/75.jpg"
+            alt="Profile"
+            className="profile-img"
+          />
           <h3 className="profile-name">John Doe</h3>
           <p className="profile-title">Administrator</p>
         </div>
       )}
+
       <nav className="nav-menu">
         <ul>
-          <li><Link to="/" className={location.pathname === '/' ? 'active' : ''}><FaTachometerAlt /><span>{!isCollapsed && 'Dashboard'}</span></Link></li>
-          <li><Link to="/users" className={location.pathname === '/users' ? 'active' : ''}><FaUsers /><span>{!isCollapsed && 'Users'}</span></Link></li>
-          <li><Link to="/orders" className={location.pathname === '/orders' ? 'active' : ''}><FaBox /><span>{!isCollapsed && 'Orders'}</span></Link></li>
-          <li><Link to="/settings" className={location.pathname === '/settings' ? 'active' : ''}><FaCog /><span>{!isCollapsed && 'Settings'}</span></Link></li>
-          <li><Link to="/faq" className={location.pathname === '/faq' ? 'active' : ''}><FaQuestionCircle /><span>{!isCollapsed && 'FAQ Page'}</span></Link></li>
-          <li><Link to="/calendar" className={location.pathname === '/calendar' ? 'active' : ''}><FaCalendarAlt /><span>{!isCollapsed && 'Calendar'}</span></Link></li>
-          <li><Link to="/team" className={location.pathname === '/team' ? 'active' : ''}><FaUsersCog /><span>{!isCollapsed && 'Manage Team'}</span></Link></li>
-          <li><Link to="/contact" className={location.pathname === '/contact' ? 'active' : ''}><FaEnvelope /><span>{!isCollapsed && 'Contact Information'}</span></Link></li>
-          <li><Link to="/tickets" className={location.pathname === '/tickets' ? 'active' : ''}><FaTicketAlt /><span>{!isCollapsed && 'Support Tickets'}</span></Link></li>
-          <li><Link to="/transactions" className={location.pathname === '/transactions' ? 'active' : ''}><FaExchangeAlt /><span>{!isCollapsed && 'Transactions'}</span></Link></li>
+          {menuItems.map(({ path, label, icon }) => (
+            <li key={path}>
+              <Link
+                to={path}
+                className={location.pathname === path ? 'active' : ''}
+              >
+                {icon}
+                {!isCollapsed && <span>{label}</span>}
+              </Link>
+            </li>
+          ))}
         </ul>
       </nav>
     </div>

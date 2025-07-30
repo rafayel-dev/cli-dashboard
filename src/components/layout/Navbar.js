@@ -55,30 +55,30 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-gray-800 text-white p-4 sticky top-0 z-50">
-      <div className="container mx-auto flex justify-between items-center">
+    <nav className="sticky top-0 z-50 p-4 text-white bg-gray-800">
+      <div className="container flex items-center justify-between mx-auto">
         <div className="text-lg font-bold">
           {getPageTitle()}
         </div>
-        <div className="flex items-center space-x-4 relative">
-          <FaBell className="cursor-pointer text-xl" onClick={toggleNotifications} />
+        <div className="relative flex items-center space-x-4">
+          <FaBell className="text-xl cursor-pointer" onClick={toggleNotifications} />
           {showNotifications && (
-            <div className="absolute top-10 right-0 bg-white text-gray-800 rounded-md shadow-lg w-64 py-2 z-50">
+            <div className="absolute right-0 z-50 w-64 py-2 text-gray-800 bg-white rounded-md shadow-lg top-10">
               <div className="px-4 py-2 font-bold border-b border-gray-200">Notifications</div>
               <div className="px-4 py-2 border-b border-gray-200">New message from John Doe.</div>
               <div className="px-4 py-2 border-b border-gray-200">Your report is ready.</div>
               <div className="px-4 py-2">5 new users registered.</div>
             </div>
           )}
-          <FaCog className="cursor-pointer text-xl" />
+          <FaCog className="text-xl cursor-pointer" />
           <div className="relative">
-            <FaUser className="cursor-pointer text-xl" onClick={toggleProfileMenu} />
+            <FaUser className="text-xl cursor-pointer" onClick={toggleProfileMenu} />
             {showProfileMenu && (
-              <div className="absolute top-10 right-0 bg-white text-gray-800 rounded-md shadow-lg w-48 py-2 z-50">
+              <div className="absolute right-0 z-50 w-48 py-2 text-gray-800 bg-white rounded-md shadow-lg top-10">
                 <div className="px-4 py-2 font-bold border-b border-gray-200">John Doe</div>
                 <Link to="/profile" className="block px-4 py-2 hover:bg-gray-100" onClick={toggleProfileMenu}>Profile</Link>
                 <Link to="/settings" className="block px-4 py-2 hover:bg-gray-100" onClick={toggleProfileMenu}>Settings</Link>
-                <button onClick={handleLogout} className="block w-full text-left px-4 py-2 hover:bg-gray-100">Logout</button>
+                <button onClick={handleLogout} className="block w-full px-4 py-2 text-left hover:bg-gray-100">Logout</button>
               </div>
             )}
           </div>
