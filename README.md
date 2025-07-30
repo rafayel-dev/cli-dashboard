@@ -1,70 +1,64 @@
-# Getting Started with Create React App
+# 🧠 Admin Dashboard — React + Tailwind
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A modern and responsive admin dashboard built with **React**, **Tailwind CSS**. Optimized for developer experience and real-world use. 
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## 🚀 Live Demo
 
-### `npm start`
+👉 [Live Preview](https://cli-dashboard.vercel.app/)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+---
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## 🛠️ Tech Stack
 
-### `npm test`
+- ⚛️ React 19
+- 🎨 Tailwind CSS
+- 🔐 Firebase Auth (optional)
+- 📦 Zustand or Redux
+- 💾 localStorage (UI persistency)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+---
 
-### `npm run build`
+## ✨ Features
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- ✅ **Responsive Design**: Adapts to various screen sizes for optimal viewing on desktop and mobile devices.
+- ✅ **Collapsible Sidebar**: Toggle sidebar visibility with state persistence using `localStorage`.
+- ✅ **Route Memory**: Automatically restores the last visited page/path on application reload.
+- ✅ **Clean Folder Structure**: Organized and maintainable project structure for better development experience.
+- ✅ **Protected Routes**: Secure routes for authenticated users (if authentication is implemented).
+- ✅ **Dynamic Content**: Dashboard components (Stat Cards, Charts, Tables) display dynamic data.
+- ✅ **Authentication Flow**: Basic login page and authentication context for user management.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## 📁 Project Structure
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```
+cli-dashboard/
+├── public/
+├── src/
+│   ├── components/
+│   │   └── common/       # Reusable, generic UI components
+│   ├── context/          # React Context APIs
+│   ├── layout/           # Structural components (Navbar, Sidebar)
+│   ├── pages/            # Page-specific components
+│   ├── styles/           # CSS files
+│   └── App.js            # Main application component
+│   └── index.js          # Entry point
+│   └── reportWebVitals.js
+│   └── setupTests.js
+├── package.json
+├── package-lock.json
+├── README.md
+└── ... (other configuration files)
+```
 
-### `npm run eject`
+## Admin Login Credentials
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+**Username:** admin
+**Password:** admin
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+👤 Author
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Rafiul Islam
+Full Stack Web Developer
+(https://github.com/rafayel-islam)
