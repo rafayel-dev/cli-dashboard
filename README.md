@@ -34,11 +34,12 @@ A modern and responsive admin dashboard built with **React**, **Tailwind CSS**. 
 
 ```
 cli-dashboard/
+├── .env
 ├── public/
 ├── src/
 │   ├── components/
 │   │   └── common/       # Reusable, generic UI components
-│   ├── context/          # React Context APIs
+│   ├── context/          # React Context APIs (e.g., AuthContext.js, ThemeContext.js)
 │   ├── layout/           # Structural components (Navbar, Sidebar)
 │   ├── pages/            # Page-specific components
 │   ├── styles/           # CSS files
