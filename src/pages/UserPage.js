@@ -82,11 +82,11 @@ const UserPage = () => {
 
   return (
     <div className="p-4">
-      <h2 className="text-2xl font-bold mb-4 text-text-primary">User Management</h2>
-      <div className="flex justify-between items-center mb-4">
+      <h2 className="mb-4 text-2xl font-bold text-text-primary">User Management</h2>
+      <div className="flex items-center justify-between mb-4">
         <button
           onClick={handleAddClick}
-          className="px-4 py-2 bg-highlight text-white dark:text-gray-900 rounded-md hover:bg-opacity-80 transition-colors duration-200"
+          className="px-4 py-2 text-white transition-colors duration-200 rounded-md bg-highlight dark:text-gray-900 hover:bg-opacity-80"
         >
           Add New User
         </button>
@@ -95,7 +95,7 @@ const UserPage = () => {
           placeholder="Search users..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          className="p-2 rounded-md bg-secondary text-text-primary border border-accent focus:outline-none focus:ring-2 focus:ring-highlight"
+          className="p-2 border rounded-md bg-secondary text-text-primary border-accent focus:outline-none focus:ring-2 focus:ring-highlight"
         />
       </div>
 
@@ -105,43 +105,43 @@ const UserPage = () => {
         </div>
       )}
 
-      <div className="bg-secondary p-4 rounded-lg shadow-md">
+      <div className="p-4 rounded-lg shadow-md bg-secondary">
         <div className="overflow-x-auto">
           <table className="min-w-full bg-secondary text-text-primary">
             <thead>
               <tr>
-                <th className="py-2 px-4 border-b border-accent text-left text-xs font-semibold uppercase tracking-wider cursor-pointer" onClick={() => handleSort('id')}>
+                <th className="px-4 py-2 text-xs font-semibold tracking-wider text-left uppercase border-b cursor-pointer border-accent" onClick={() => handleSort('id')}>
                   ID {getSortIcon('id')}
                 </th>
-                <th className="py-2 px-4 border-b border-accent text-left text-xs font-semibold uppercase tracking-wider cursor-pointer" onClick={() => handleSort('name')}>
+                <th className="px-4 py-2 text-xs font-semibold tracking-wider text-left uppercase border-b cursor-pointer border-accent" onClick={() => handleSort('name')}>
                   Name {getSortIcon('name')}
                 </th>
-                <th className="py-2 px-4 border-b border-accent text-left text-xs font-semibold uppercase tracking-wider cursor-pointer" onClick={() => handleSort('email')}>
+                <th className="px-4 py-2 text-xs font-semibold tracking-wider text-left uppercase border-b cursor-pointer border-accent" onClick={() => handleSort('email')}>
                   Email {getSortIcon('email')}
                 </th>
-                <th className="py-2 px-4 border-b border-accent text-left text-xs font-semibold uppercase tracking-wider cursor-pointer" onClick={() => handleSort('role')}>
+                <th className="px-4 py-2 text-xs font-semibold tracking-wider text-left uppercase border-b cursor-pointer border-accent" onClick={() => handleSort('role')}>
                   Role {getSortIcon('role')}
                 </th>
-                <th className="py-2 px-4 border-b border-accent text-left text-xs font-semibold uppercase tracking-wider">Actions</th>
+                <th className="px-4 py-2 text-xs font-semibold tracking-wider text-left uppercase border-b border-accent">Actions</th>
               </tr>
             </thead>
             <tbody>
               {users.map((user) => (
                 <tr key={user.id} className="border-b border-accent hover:bg-primary">
-                  <td className="py-2 px-4 text-sm text-text-primary">{user.id}</td>
-                  <td className="py-2 px-4 text-sm text-text-primary">{user.name}</td>
-                  <td className="py-2 px-4 text-sm text-text-primary">{user.email}</td>
-                  <td className="py-2 px-4 text-sm text-text-primary">{user.role}</td>
-                  <td className="py-2 px-4 text-sm">
+                  <td className="px-4 py-2 text-sm text-text-primary">{user.id}</td>
+                  <td className="px-4 py-2 text-sm text-text-primary">{user.name}</td>
+                  <td className="px-4 py-2 text-sm text-text-primary">{user.email}</td>
+                  <td className="px-4 py-2 text-sm text-text-primary">{user.role}</td>
+                  <td className="px-4 py-2 text-sm">
                     <button
                       onClick={() => handleEditClick(user)}
-                      className="mr-2 px-3 py-1 bg-blue-500 text-text-primary rounded-md hover:bg-blue-600 transition-colors duration-200"
+                      className="px-3 py-1 mr-2 text-white transition-colors duration-200 bg-blue-500 rounded-md hover:bg-blue-600"
                     >
                       Edit
                     </button>
                     <button
                       onClick={() => handleDeleteClick(user.id)}
-                      className="px-3 py-1 bg-red-500 text-text-primary rounded-md hover:bg-red-600 transition-colors duration-200"
+                      className="px-3 py-1 text-white transition-colors duration-200 bg-red-500 rounded-md hover:bg-red-600"
                     >
                       Delete
                     </button>
@@ -151,11 +151,11 @@ const UserPage = () => {
             </tbody>
           </table>
         </div>
-        <div className="flex justify-between items-center mt-4">
+        <div className="flex items-center justify-between mt-4">
           <button
             onClick={() => setPage(prev => Math.max(prev - 1, 1))}
             disabled={page === 1}
-            className="px-4 py-2 bg-highlight text-white dark:text-gray-900 rounded-md hover:bg-opacity-80 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="px-4 py-2 text-white transition-colors duration-200 rounded-md bg-highlight dark:text-gray-900 hover:bg-opacity-80 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             Previous
           </button>
@@ -163,7 +163,7 @@ const UserPage = () => {
           <button
             onClick={() => setPage(prev => Math.min(prev + 1, totalPages))}
             disabled={page === totalPages}
-            className="px-4 py-2 bg-highlight text-white dark:text-gray-900 rounded-md hover:bg-opacity-80 transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="px-4 py-2 text-white transition-colors duration-200 rounded-md bg-highlight dark:text-gray-900 hover:bg-opacity-80 disabled:opacity-50 disabled:cursor-not-allowed"
           >
             Next
           </button>

@@ -1,0 +1,5 @@
+feat: Implement user management features and update existing pages
+
+This commit introduces new components and services for user management,
+and updates several existing pages to reflect these changes or other
+recent modifications.
