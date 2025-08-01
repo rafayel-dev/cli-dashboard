@@ -5,12 +5,16 @@ import TableComponent from '../components/common/TableComponent';
 
 const DashboardPage = () => {
   return (
-    <div className="p-4">
-      <h2 className="text-2xl font-bold mb-4">Dashboard Overview</h2>
-      <p>Welcome to your dashboard! Here you can see an overview of your data.</p>
-      <StatCardsContainer />
-      <ChartComponent />
-      <TableComponent />
+    <div className="p-8 bg-primary min-h-screen">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <StatCardsContainer />
+      </div>
+      <div className="mt-8">
+        <ChartComponent />
+      </div>
+      <div className="mt-8">
+        <TableComponent />
+      </div>
     </div>
   );
 };

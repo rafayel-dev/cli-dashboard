@@ -20,19 +20,19 @@ const LoginPage = () => {
 
   return (
     <div className="flex items-center justify-center w-screen h-screen bg-gradient-to-br from-blue-500 to-purple-600">
-      <div className="w-full max-w-md p-8 mx-auto bg-white shadow-2xl rounded-xl">
-        <h2 className="mb-8 text-3xl font-extrabold text-center text-gray-800">
+      <div className="w-full max-w-md p-8 mx-auto shadow-2xl bg-secondary bg-opacity-50 backdrop-blur-md rounded-xl">
+        <h2 className="mb-8 text-3xl font-extrabold text-center text-text-primary">
           Welcome Back!
         </h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-6">
-            <label htmlFor="username" className="block mb-2 text-sm font-semibold text-gray-700">
+            <label htmlFor="username" className="block mb-2 text-sm font-semibold text-text-primary">
               Username
             </label>
             <input
               type="text"
               id="username"
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-4 py-2 border rounded-lg bg-primary bg-opacity-50 text-text-primary border-accent focus:outline-none focus:ring-2 focus:ring-highlight"
               placeholder="admin"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
@@ -40,13 +40,13 @@ const LoginPage = () => {
             />
           </div>
           <div className="mb-6">
-            <label htmlFor="password" className="block mb-2 text-sm font-semibold text-gray-700">
+            <label htmlFor="password" className="block mb-2 text-sm font-semibold text-text-primary">
               Password
             </label>
             <input
               type="password"
               id="password"
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="w-full px-4 py-2 border rounded-lg bg-primary bg-opacity-50 text-text-primary border-accent focus:outline-none focus:ring-2 focus:ring-highlight"
               placeholder="admin"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
@@ -55,14 +55,14 @@ const LoginPage = () => {
           </div>
           <button
             type="submit"
-            className="w-full py-3 font-semibold text-white transition duration-300 bg-blue-600 rounded-lg hover:bg-blue-700"
+            className="w-full py-3 font-semibold transition duration-300 rounded-lg bg-highlight text-primary hover:bg-opacity-80"
           >
             Sign In
           </button>
         </form>
-        <p className="mt-6 text-sm text-center text-gray-600">
+        <p className="mt-6 text-sm text-center text-text-primary">
           Don't have an account?{' '}
-          <a href="#" className="font-medium text-blue-600 hover:underline">
+          <a href="#" className="font-medium text-highlight hover:underline">
             Sign Up
           </a>
         </p>
@@ -72,3 +72,4 @@ const LoginPage = () => {
 };
 
 export default LoginPage;
+

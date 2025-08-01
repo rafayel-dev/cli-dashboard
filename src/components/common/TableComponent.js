@@ -9,25 +9,25 @@ const TableComponent = () => {
   ];
 
   return (
-    <div className="bg-white p-4 rounded-lg shadow-md m-4">
-      <h2 className="text-xl font-semibold text-gray-800 mb-4">User Data</h2>
+    <div className="bg-secondary p-6 rounded-lg shadow-lg">
+      <h2 className="text-xl font-semibold text-highlight mb-4">User Data</h2>
       <div className="overflow-x-auto">
-        <table className="min-w-full bg-white">
+        <table className="min-w-full bg-secondary">
           <thead>
             <tr>
-              <th className="py-2 px-4 border-b border-gray-200 bg-gray-50 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">ID</th>
-              <th className="py-2 px-4 border-b border-gray-200 bg-gray-50 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Name</th>
-              <th className="py-2 px-4 border-b border-gray-200 bg-gray-50 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Email</th>
-              <th className="py-2 px-4 border-b border-gray-200 bg-gray-50 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Role</th>
+              <th className="py-3 px-6 text-left text-xs font-semibold text-text-secondary uppercase tracking-wider">ID</th>
+              <th className="py-3 px-6 text-left text-xs font-semibold text-text-secondary uppercase tracking-wider">Name</th>
+              <th className="py-3 px-6 text-left text-xs font-semibold text-text-secondary uppercase tracking-wider">Email</th>
+              <th className="py-3 px-6 text-left text-xs font-semibold text-text-secondary uppercase tracking-wider">Role</th>
             </tr>
           </thead>
-          <tbody>
-            {data.map((item) => (
-              <tr key={item.id}>
-                <td className="py-2 px-4 border-b border-gray-200 text-sm text-gray-700">{item.id}</td>
-                <td className="py-2 px-4 border-b border-gray-200 text-sm text-gray-700">{item.name}</td>
-                <td className="py-2 px-4 border-b border-gray-200 text-sm text-gray-700">{item.email}</td>
-                <td className="py-2 px-4 border-b border-gray-200 text-sm text-gray-700">{item.role}</td>
+          <tbody className="text-text-primary">
+            {data.map((item, index) => (
+              <tr key={item.id} className={`${index % 2 === 0 ? 'bg-primary' : 'bg-secondary'} hover:bg-accent`}>
+                <td className="py-3 px-6 whitespace-nowrap">{item.id}</td>
+                <td className="py-3 px-6 whitespace-nowrap">{item.name}</td>
+                <td className="py-3 px-6 whitespace-nowrap">{item.email}</td>
+                <td className="py-3 px-6 whitespace-nowrap">{item.role}</td>
               </tr>
             ))}
           </tbody>

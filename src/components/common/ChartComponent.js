@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Line, Bar, Pie } from 'react-chartjs-2';
 import {
   Chart as ChartJS,
@@ -13,6 +13,7 @@ import {
   BarElement, // Added for Bar Chart
 } from 'chart.js';
 import { Chart } from 'react-google-charts'; // Import for Google Charts
+import { ThemeContext } from '../../context/ThemeContext';
 
 ChartJS.register(
   CategoryScale,
@@ -27,6 +28,10 @@ ChartJS.register(
 );
 
 const ChartComponent = () => {
+  const { theme } = useContext(ThemeContext);
+  const textColor = theme === 'dark' ? '#edf2f7' : '#333333';
+  const gridColor = theme === 'dark' ? '#4a5568' : '#e2e8f0';
+
   // Line Chart Data and Options (existing)
   const lineData = {
     labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
@@ -35,7 +40,7 @@ const ChartComponent = () => {
         label: 'Sales',
         data: [65, 59, 80, 81, 56, 55, 40],
         fill: false,
-        borderColor: 'rgb(75, 192, 192)',
+        borderColor: '#4a5568',
         tension: 0.1,
       },
     ],
@@ -46,12 +51,34 @@ const ChartComponent = () => {
     plugins: {
       legend: {
         position: 'top',
+        labels: {
+          color: textColor
+        }
       },
       title: {
         display: true,
         text: 'Monthly Sales Data',
+        color: textColor
       },
     },
+    scales: {
+      x: {
+        ticks: {
+          color: textColor
+        },
+        grid: {
+          color: gridColor
+        }
+      },
+      y: {
+        ticks: {
+          color: textColor
+        },
+        grid: {
+          color: gridColor
+        }
+      }
+    }
   };
 
   // Bar Chart Data and Options
@@ -87,12 +114,34 @@ const ChartComponent = () => {
     plugins: {
       legend: {
         position: 'top',
+        labels: {
+          color: textColor
+        }
       },
       title: {
         display: true,
         text: 'Bar Chart Example',
+        color: textColor
       },
     },
+    scales: {
+      x: {
+        ticks: {
+          color: textColor
+        },
+        grid: {
+          color: gridColor
+        }
+      },
+      y: {
+        ticks: {
+          color: textColor
+        },
+        grid: {
+          color: gridColor
+        }
+      }
+    }
   };
 
   // Pie Chart Data and Options
@@ -122,10 +171,14 @@ const ChartComponent = () => {
     plugins: {
       legend: {
         position: 'top',
+        labels: {
+          color: textColor
+        }
       },
       title: {
         display: true,
         text: 'Pie Chart Example',
+        color: textColor
       },
     },
   };
@@ -142,22 +195,28 @@ const ChartComponent = () => {
   ];
 
   const geoOptions = {
-    colorAxis: { colors: ['#bfd3e6', '#8c96c6', '#8856a7', '#810f7c'] },
+    backgroundColor: theme === 'dark' ? '#1a202c' : '#ffffff',
+    colorAxis: { colors: ['#4a5568', '#a0aec0', '#edf2f7'] },
+    datalessRegionColor: theme === 'dark' ? '#2d3748' : '#f8f9fa',
+    defaultColor: theme === 'dark' ? '#f7fafc' : '#e2e8f0',
+    textStyle: { color: textColor },
+    titleTextStyle: { color: textColor },
+    legendTextStyle: { color: textColor },
   };
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 p-4">
-      <div className="bg-white p-4 rounded-lg shadow-md">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div className="bg-secondary p-6 rounded-lg shadow-lg">
         <Line data={lineData} options={lineOptions} />
       </div>
-      <div className="bg-white p-4 rounded-lg shadow-md">
+      <div className="bg-secondary p-6 rounded-lg shadow-lg">
         <Bar data={barData} options={barOptions} />
       </div>
-      <div className="bg-white p-4 rounded-lg shadow-md">
+      <div className="bg-secondary p-6 rounded-lg shadow-lg">
         <Pie data={pieData} options={pieOptions} />
       </div>
-      <div className="bg-white p-4 rounded-lg shadow-md">
-        <h3 className="text-lg font-semibold text-gray-700 mb-2">Geography Chart Example</h3>
+      <div className="bg-secondary p-6 rounded-lg shadow-lg">
+        <h3 className="text-xl font-semibold text-highlight mb-4">Geography Chart</h3>
         <Chart
           chartType="GeoChart"
           width="100%"

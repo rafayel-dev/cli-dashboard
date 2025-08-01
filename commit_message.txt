@@ -1,1 +1,0 @@
-feat: Implement full dashboard functionality with routing, dynamic content, and new pages.

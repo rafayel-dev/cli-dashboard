@@ -1,7 +1,8 @@
 import React, { useState, useContext } from 'react';
-import { FaBell, FaCog, FaUser } from 'react-icons/fa';
+import { FaBell, FaCog, FaUser, FaSun, FaMoon } from 'react-icons/fa';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
+import { ThemeContext } from '../context/ThemeContext';
 
 const Navbar = () => {
   const [showNotifications, setShowNotifications] = useState(false);
@@ -9,6 +10,7 @@ const Navbar = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { logout } = useContext(AuthContext);
+  const { theme, toggleTheme } = useContext(ThemeContext);
 
   const getPageTitle = () => {
     switch (location.pathname) {
@@ -55,30 +57,35 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="sticky top-0 z-50 p-4 text-white bg-gray-800">
+    <nav className="sticky top-0 z-50 p-4 bg-secondary text-text-primary">
       <div className="container flex items-center justify-between mx-auto">
-        <div className="text-lg font-bold">
+        <div className="text-2xl font-bold font-serif">
           {getPageTitle()}
         </div>
-        <div className="relative flex items-center space-x-4">
-          <FaBell className="text-xl cursor-pointer" onClick={toggleNotifications} />
-          {showNotifications && (
-            <div className="absolute right-0 z-50 w-64 py-2 text-gray-800 bg-white rounded-md shadow-lg top-10">
-              <div className="px-4 py-2 font-bold border-b border-gray-200">Notifications</div>
-              <div className="px-4 py-2 border-b border-gray-200">New message from John Doe.</div>
-              <div className="px-4 py-2 border-b border-gray-200">Your report is ready.</div>
-              <div className="px-4 py-2">5 new users registered.</div>
-            </div>
-          )}
-          <FaCog className="text-xl cursor-pointer" />
+        <div className="relative flex items-center space-x-6">
+          <button onClick={toggleTheme} className="text-2xl cursor-pointer hover:text-highlight transition-colors duration-200">
+            {theme === 'dark' ? <FaSun /> : <FaMoon />}
+          </button>
           <div className="relative">
-            <FaUser className="text-xl cursor-pointer" onClick={toggleProfileMenu} />
+            <FaBell className="text-2xl cursor-pointer hover:text-highlight transition-colors duration-200" onClick={toggleNotifications} />
+            {showNotifications && (
+              <div className="absolute right-0 z-50 w-64 py-2 mt-2 rounded-md shadow-lg bg-primary text-text-primary">
+                <div className="px-4 py-2 font-bold border-b border-accent">Notifications</div>
+                <div className="px-4 py-2 border-b border-accent hover:bg-accent">New message from John Doe.</div>
+                <div className="px-4 py-2 border-b border-accent hover:bg-accent">Your report is ready.</div>
+                <div className="px-4 py-2 hover:bg-accent">5 new users registered.</div>
+              </div>
+            )}
+          </div>
+          <FaCog className="text-2xl cursor-pointer hover:text-highlight transition-colors duration-200" />
+          <div className="relative">
+            <FaUser className="text-2xl cursor-pointer hover:text-highlight transition-colors duration-200" onClick={toggleProfileMenu} />
             {showProfileMenu && (
-              <div className="absolute right-0 z-50 w-48 py-2 text-gray-800 bg-white rounded-md shadow-lg top-10">
-                <div className="px-4 py-2 font-bold border-b border-gray-200">John Doe</div>
-                <Link to="/profile" className="block px-4 py-2 hover:bg-gray-100" onClick={toggleProfileMenu}>Profile</Link>
-                <Link to="/settings" className="block px-4 py-2 hover:bg-gray-100" onClick={toggleProfileMenu}>Settings</Link>
-                <button onClick={handleLogout} className="block w-full px-4 py-2 text-left hover:bg-gray-100">Logout</button>
+              <div className="absolute right-0 z-50 w-48 py-2 mt-2 rounded-md shadow-lg bg-primary text-text-primary">
+                <div className="px-4 py-2 font-bold border-b border-accent">John Doe</div>
+                <Link to="/profile" className="block px-4 py-2 hover:bg-accent" onClick={toggleProfileMenu}>Profile</Link>
+                <Link to="/settings" className="block px-4 py-2 hover:bg-accent" onClick={toggleProfileMenu}>Settings</Link>
+                <button onClick={handleLogout} className="block w-full px-4 py-2 text-left hover:bg-accent">Logout</button>
               </div>
             )}
           </div>

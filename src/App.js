@@ -1,4 +1,3 @@
-import './styles/App.css';
 import Navbar from './layout/Navbar';
 import Sidebar from './layout/Sidebar';
 import DashboardPage from './pages/DashboardPage';
@@ -17,6 +16,7 @@ import LoginPage from './pages/LoginPage';
 
 import PrivateRoute from './components/common/PrivateRoute';
 import { AuthProvider } from './context/AuthContext';
+import { ThemeProvider } from './context/ThemeContext';
 
 import { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation, useNavigate } from 'react-router-dom';
@@ -36,9 +36,11 @@ function App() {
   };
 
   return (
-    <Router>
-      <AppContent isSidebarCollapsed={isSidebarCollapsed} toggleSidebar={toggleSidebar} />
-    </Router>
+    <ThemeProvider>
+      <Router>
+        <AppContent isSidebarCollapsed={isSidebarCollapsed} toggleSidebar={toggleSidebar} />
+      </Router>
+    </ThemeProvider>
   );
 }
 
@@ -61,7 +63,7 @@ function AppContent({ isSidebarCollapsed, toggleSidebar }) {
 
   return (
     <AuthProvider>
-      <div className="flex">
+      <div className="flex bg-primary min-h-screen">
         <Routes>
           <Route path="/login" element={<LoginPage />} />
           <Route 
@@ -73,21 +75,23 @@ function AppContent({ isSidebarCollapsed, toggleSidebar }) {
                     isCollapsed={isSidebarCollapsed} 
                     toggleSidebar={toggleSidebar} 
                   />
-                  <div className={`flex-1 ${isSidebarCollapsed ? 'ml-20' : 'ml-64'}`}>
+                  <div className="flex-1 flex flex-col">
                     <Navbar />
-                    <Routes>
-                      <Route path="/" element={<DashboardPage />} />
-                      <Route path="/users" element={<UserPage />} />
-                      <Route path="/orders" element={<OrdersPage />} />
-                      <Route path="/settings" element={<SettingsPage />} />
-                      <Route path="/faq" element={<FAQPage />} />
-                      <Route path="/calendar" element={<CalendarPage />} />
-                      <Route path="/team" element={<ManageTeamPage />} />
-                      <Route path="/contact" element={<ContactInfoPage />} />
-                      <Route path="/profile" element={<ProfilePage />} />
-                      <Route path="/tickets" element={<SupportTicketsPage />} />
-                      <Route path="/transactions" element={<TransactionsPage />} />
-                    </Routes>
+                    <main className="flex-grow p-8">
+                      <Routes>
+                        <Route path="/" element={<DashboardPage />} />
+                        <Route path="/users" element={<UserPage />} />
+                        <Route path="/orders" element={<OrdersPage />} />
+                        <Route path="/settings" element={<SettingsPage />} />
+                        <Route path="/faq" element={<FAQPage />} />
+                        <Route path="/calendar" element={<CalendarPage />} />
+                        <Route path="/team" element={<ManageTeamPage />} />
+                        <Route path="/contact" element={<ContactInfoPage />} />
+                        <Route path="/profile" element={<ProfilePage />} />
+                        <Route path="/tickets" element={<SupportTicketsPage />} />
+                        <Route path="/transactions" element={<TransactionsPage />} />
+                      </Routes>
+                    </main>
                   </div>
                 </div>
               </PrivateRoute>
