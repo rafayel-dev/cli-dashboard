@@ -27,22 +27,22 @@ const FAQPage = () => {
   };
 
   return (
-    <div className="p-4">
-      <h2 className="text-2xl font-bold mb-4">Frequently Asked Questions</h2>
-      <div className="bg-white p-6 rounded-lg shadow-md">
+    <div className="p-4 bg-primary min-h-screen">
+      <h2 className="text-2xl font-bold mb-4 text-text-primary">Frequently Asked Questions</h2>
+      <div className="bg-secondary p-6 rounded-lg shadow-md">
         {faqs.map((faq, index) => (
-          <div key={index} className="mb-4 border-b pb-4 last:border-b-0 last:pb-0">
+          <div key={index} className="mb-4 border-b border-accent pb-4 last:border-b-0 last:pb-0">
             <button
-              className="flex justify-between items-center w-full text-left font-semibold text-lg text-gray-800 focus:outline-none"
+              className="flex justify-between items-center w-full text-left font-semibold text-lg text-text-primary focus:outline-none"
               onClick={() => toggleQuestion(index)}
             >
               {faq.question}
-              <span className="text-gray-500">
+              <span className="text-text-secondary">
                 {openQuestion === index ? '-' : '+'}
               </span>
             </button>
             {openQuestion === index && (
-              <p className="mt-2 text-gray-600">{faq.answer}</p>
+              <p className="mt-2 text-text-secondary">{faq.answer}</p>
             )}
           </div>
         ))}

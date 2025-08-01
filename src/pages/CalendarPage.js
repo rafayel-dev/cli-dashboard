@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+import { ThemeContext } from '../context/ThemeContext';
 
 const CalendarPage = () => {
   const [currentDate, setCurrentDate] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState(null);
+  const { theme } = useContext(ThemeContext);
 
   const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
   const months = [
@@ -45,7 +47,7 @@ const CalendarPage = () => {
     calendarDays.push(
       <div 
         key={i} 
-        className={`p-2 border rounded-md hover:bg-gray-100 cursor-pointer ${isSelected ? 'bg-blue-500 text-white' : ''}`}
+        className={`p-2 border rounded-md cursor-pointer ${isSelected ? 'bg-highlight text-white' : 'hover:bg-accent text-text-primary'}`}
         onClick={() => handleDateClick(new Date(year, month, i))}
       >
         {i}
@@ -55,14 +57,14 @@ const CalendarPage = () => {
 
   return (
     <div className="p-4">
-      <h2 className="text-2xl font-bold mb-4">Calendar</h2>
-      <div className="bg-white p-6 rounded-lg shadow-md">
+      <h2 className="text-2xl font-bold mb-4 text-text-primary">Calendar</h2>
+      <div className="bg-secondary p-6 rounded-lg shadow-md">
         <div className="flex justify-between items-center mb-4">
-          <button onClick={handlePrevMonth} className="p-2 rounded-full hover:bg-gray-200"><FaChevronLeft /></button>
-          <h3 className="text-xl font-semibold">{months[month]} {year}</h3>
-          <button onClick={handleNextMonth} className="p-2 rounded-full hover:bg-gray-200"><FaChevronRight /></button>
+          <button onClick={handlePrevMonth} className="p-2 rounded-full hover:bg-accent text-text-primary"><FaChevronLeft /></button>
+          <h3 className="text-xl font-semibold text-text-primary">{months[month]} {year}</h3>
+          <button onClick={handleNextMonth} className="p-2 rounded-full hover:bg-accent text-text-primary"><FaChevronRight /></button>
         </div>
-        <div className="grid grid-cols-7 gap-2 text-center font-bold text-gray-700 mb-4">
+        <div className="grid grid-cols-7 gap-2 text-center font-bold text-text-secondary mb-4">
           {daysOfWeek.map((day) => (
             <div key={day}>{day}</div>
           ))}

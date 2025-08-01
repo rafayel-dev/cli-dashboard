@@ -9,25 +9,25 @@ const SupportTicketsPage = () => {
   ];
 
   return (
-    <div className="p-4">
-      <h2 className="text-2xl font-bold mb-4">Support Tickets</h2>
-      <div className="bg-white p-4 rounded-lg shadow-md">
-        <table className="min-w-full bg-white">
+    <div className="p-4 bg-primary min-h-screen">
+      <h2 className="text-2xl font-bold mb-4 text-text-primary">Support Tickets</h2>
+      <div className="bg-secondary p-4 rounded-lg shadow-md">
+        <table className="min-w-full bg-secondary text-text-primary">
           <thead>
             <tr>
-              <th className="py-2 px-4 border-b border-gray-200 bg-gray-50 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Ticket ID</th>
-              <th className="py-2 px-4 border-b border-gray-200 bg-gray-50 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Subject</th>
-              <th className="py-2 px-4 border-b border-gray-200 bg-gray-50 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Status</th>
-              <th className="py-2 px-4 border-b border-gray-200 bg-gray-50 text-left text-xs font-semibold text-gray-600 uppercase tracking-wider">Date</th>
+              <th className="py-2 px-4 border-b border-accent bg-secondary text-left text-xs font-semibold text-text-secondary uppercase tracking-wider">Ticket ID</th>
+              <th className="py-2 px-4 border-b border-accent bg-secondary text-left text-xs font-semibold text-text-secondary uppercase tracking-wider">Subject</th>
+              <th className="py-2 px-4 border-b border-accent bg-secondary text-left text-xs font-semibold text-text-secondary uppercase tracking-wider">Status</th>
+              <th className="py-2 px-4 border-b border-accent bg-secondary text-left text-xs font-semibold text-text-secondary uppercase tracking-wider">Date</th>
             </tr>
           </thead>
           <tbody>
-            {tickets.map((ticket) => (
-              <tr key={ticket.id}>
-                <td className="py-2 px-4 border-b border-gray-200 text-sm text-gray-700">{ticket.id}</td>
-                <td className="py-2 px-4 border-b border-gray-200 text-sm text-gray-700">{ticket.subject}</td>
-                <td className="py-2 px-4 border-b border-gray-200 text-sm text-gray-700">{ticket.status}</td>
-                <td className="py-2 px-4 border-b border-gray-200 text-sm text-gray-700">{ticket.date}</td>
+            {tickets.map((ticket, index) => (
+              <tr key={ticket.id} className={`${index % 2 === 0 ? 'bg-primary' : 'bg-secondary'} hover:bg-accent`}>
+                <td className="py-2 px-4 text-sm">{ticket.id}</td>
+                <td className="py-2 px-4 text-sm">{ticket.subject}</td>
+                <td className="py-2 px-4 text-sm">{ticket.status}</td>
+                <td className="py-2 px-4 text-sm">{ticket.date}</td>
               </tr>
             ))}
           </tbody>

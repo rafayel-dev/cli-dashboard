@@ -16,6 +16,7 @@ import LoginPage from './pages/LoginPage';
 
 import PrivateRoute from './components/common/PrivateRoute';
 import { AuthProvider } from './context/AuthContext';
+import { UserProvider } from './context/UserContext';
 import { ThemeProvider } from './context/ThemeContext';
 
 import { useState, useEffect } from 'react';
@@ -63,7 +64,8 @@ function AppContent({ isSidebarCollapsed, toggleSidebar }) {
 
   return (
     <AuthProvider>
-      <div className="flex bg-primary min-h-screen">
+      <UserProvider>
+        <div className="flex bg-primary min-h-screen">
         <Routes>
           <Route path="/login" element={<LoginPage />} />
           <Route 
@@ -99,6 +101,7 @@ function AppContent({ isSidebarCollapsed, toggleSidebar }) {
           />
         </Routes>
       </div>
+      </UserProvider>
     </AuthProvider>
   );
 }
