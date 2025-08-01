@@ -43,11 +43,13 @@ const CalendarPage = () => {
     calendarDays.push(<div key={`empty-${i}`} className="p-2"></div>);
   }
   for (let i = 1; i <= daysInMonth; i++) {
+    const today = new Date();
+    const isToday = today.getDate() === i && today.getMonth() === month && today.getFullYear() === year;
     const isSelected = selectedDate && selectedDate.getDate() === i && selectedDate.getMonth() === month && selectedDate.getFullYear() === year;
     calendarDays.push(
       <div 
         key={i} 
-        className={`p-2 border rounded-md cursor-pointer ${isSelected ? 'bg-highlight text-white' : 'hover:bg-accent text-text-primary'}`}
+        className={`p-2 border rounded-md cursor-pointer ${isSelected ? 'bg-highlight text-white' : isToday ? 'border-2 border-blue-500' : 'hover:bg-accent text-text-primary'}`}
         onClick={() => handleDateClick(new Date(year, month, i))}
       >
         {i}
