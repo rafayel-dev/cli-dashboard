@@ -34,13 +34,13 @@ const Sidebar = ({ isCollapsed, toggleSidebar }) => {
 
       <div className="flex flex-col items-center mt-8">
         <img
-          src="https://randomuser.me/api/portraits/men/75.jpg"
+          src="/Professioal Full Stack Website Developer.png"
           alt="Profile"
           className={`object-cover rounded-full transition-all duration-300 ${isCollapsed ? 'w-12 h-12' : 'w-24 h-24'}`}
         />
         {!isCollapsed && (
           <div className="text-center mt-4">
-            <h3 className="text-lg font-semibold">John Doe</h3>
+            <h3 className="text-lg font-semibold">Mr Wick</h3>
             <p className="text-sm text-text-secondary">Administrator</p>
           </div>
         )}

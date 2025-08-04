@@ -77,9 +77,9 @@ function AppContent({ isSidebarCollapsed, toggleSidebar }) {
                     isCollapsed={isSidebarCollapsed} 
                     toggleSidebar={toggleSidebar} 
                   />
-                  <div className="flex flex-col flex-1 overflow-y-auto">
+                  <div className="flex flex-col flex-1">
                     <Navbar />
-                    <main className="flex-grow p-8">
+                    <main className="flex-grow p-8 overflow-y-auto">
                       <Routes>
                         <Route path="/" element={<DashboardPage />} />
                         <Route path="/users" element={<UserPage />} />
