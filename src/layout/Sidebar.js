@@ -24,7 +24,7 @@ const Sidebar = ({ isCollapsed, toggleSidebar }) => {
   ];
 
   return (
-    <div className={`bg-secondary text-text-primary transition-all duration-300 ${isCollapsed ? 'w-20' : 'w-64'}`}>
+    <div className={`bg-secondary text-text-primary transition-all duration-300 overflow-y-auto ${isCollapsed ? 'w-20' : 'w-64'}`}>
       <div className="flex items-center justify-between p-4">
         <h1 className={`text-2xl font-bold ${isCollapsed ? 'hidden' : 'block'}`}>Admin</h1>
         <button onClick={toggleSidebar} className="text-2xl">

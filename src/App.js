@@ -19,53 +19,56 @@ import { AuthProvider } from './context/AuthContext';
 import { UserProvider } from './context/UserContext';
 import { ThemeProvider } from './context/ThemeContext';
 
-import { useState, useEffect } from 'react';
+
+
+import { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation, useNavigate } from 'react-router-dom';
 
 function App() {
-  const [isSidebarCollapsed, setSidebarCollapsed] = useState(() => {
+  return (
+    <ThemeProvider>
+      <Router>
+          <AppContent />
+      </Router>
+    </ThemeProvider>
+  );
+}
+
+function AppContent() {
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(() => {
     const storedState = localStorage.getItem('sidebarCollapsed');
     return storedState ? JSON.parse(storedState) : false;
   });
 
   const toggleSidebar = () => {
-    setSidebarCollapsed(prevState => {
+    setIsSidebarCollapsed(prevState => {
       const newState = !prevState;
       localStorage.setItem('sidebarCollapsed', JSON.stringify(newState));
       return newState;
     });
   };
 
-  return (
-    <ThemeProvider>
-      <Router>
-        <AppContent isSidebarCollapsed={isSidebarCollapsed} toggleSidebar={toggleSidebar} />
-      </Router>
-    </ThemeProvider>
-  );
-}
-
-function AppContent({ isSidebarCollapsed, toggleSidebar }) {
-  const location = useLocation();
-  const navigate = useNavigate();
-
   useEffect(() => {
     // Save current path to localStorage on route change
     localStorage.setItem('lastVisitedPath', location.pathname);
   }, [location.pathname]);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     // Restore last visited path on initial load
     const lastVisitedPath = localStorage.getItem('lastVisitedPath');
     if (lastVisitedPath && lastVisitedPath !== location.pathname && location.pathname === '/') {
       navigate(lastVisitedPath);
     }
-  }, []); // Run only once on mount
+  }, [location.pathname, navigate]); // Run only once on mount
 
   return (
     <AuthProvider>
       <UserProvider>
-        <div className="flex min-h-screen overflow-y-auto bg-primary">
+        <div className="flex h-screen bg-primary">
         <Routes>
           <Route path="/login" element={<LoginPage />} />
           <Route 
@@ -73,15 +76,12 @@ function AppContent({ isSidebarCollapsed, toggleSidebar }) {
             element={
               <PrivateRoute>
                 <div className="flex w-full">
-                  <Sidebar 
-                    isCollapsed={isSidebarCollapsed} 
-                    toggleSidebar={toggleSidebar} 
-                  />
-                  <div className="flex flex-col flex-1">
+                  <Sidebar isCollapsed={isSidebarCollapsed} toggleSidebar={toggleSidebar} />
+                  <div className="flex flex-col flex-1 h-full overflow-y-auto">
                     <Navbar />
-                    <main className="flex-grow p-8 overflow-y-auto">
+                    <main className="flex-grow p-8">
                       <Routes>
-                        <Route path="/" element={<DashboardPage />} />
+                        <Route path="/" element={<DashboardPage isSidebarCollapsed={isSidebarCollapsed} />} />
                         <Route path="/users" element={<UserPage />} />
                         <Route path="/orders" element={<OrdersPage />} />
                         <Route path="/settings" element={<SettingsPage />} />

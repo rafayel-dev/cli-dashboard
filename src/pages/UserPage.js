@@ -7,7 +7,7 @@ const UserPage = () => {
   const { 
     users, loading, error, totalPages,
     page, setPage,
-    limit, setLimit,
+    limit,
     sortBy, setSortBy,
     sortOrder, setSortOrder,
     searchTerm, setSearchTerm,

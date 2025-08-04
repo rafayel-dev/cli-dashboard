@@ -59,7 +59,8 @@ const ChartComponent = () => {
         label: 'Sales',
         data: filteredSales.map(sale => sale.sales),
         fill: false,
-        borderColor: '#4a5568',
+        borderColor: theme === 'dark' ? '#8A2BE2' : '#2196F3',
+        backgroundColor: theme === 'dark' ? 'rgba(138, 43, 226, 0.2)' : 'rgba(33, 150, 243, 0.2)',
         tension: 0.1,
       },
     ],
@@ -67,6 +68,7 @@ const ChartComponent = () => {
 
   const lineOptions = {
     responsive: true,
+    maintainAspectRatio: false,
     plugins: {
       legend: {
         position: 'top',
@@ -130,6 +132,7 @@ const ChartComponent = () => {
 
   const barOptions = {
     responsive: true,
+    maintainAspectRatio: false,
     plugins: {
       legend: {
         position: 'top',
@@ -187,6 +190,7 @@ const ChartComponent = () => {
 
   const pieOptions = {
     responsive: true,
+    maintainAspectRatio: false,
     plugins: {
       legend: {
         position: 'top',
@@ -215,7 +219,7 @@ const ChartComponent = () => {
 
   const geoOptions = {
     backgroundColor: theme === 'dark' ? '#1a202c' : '#ffffff',
-    colorAxis: { colors: ['#4a5568', '#a0aec0', '#edf2f7'] },
+    colorAxis: { colors: theme === 'dark' ? ['#FFD700', '#8A2BE2', '#00CED1'] : ['#FFC107', '#2196F3', '#4CAF50'] },
     datalessRegionColor: theme === 'dark' ? '#2d3748' : '#f8f9fa',
     defaultColor: theme === 'dark' ? '#f7fafc' : '#e2e8f0',
     textStyle: { color: textColor },
@@ -224,34 +228,44 @@ const ChartComponent = () => {
   };
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-      <div className="bg-secondary p-6 rounded-lg shadow-lg">
-        <div className="flex justify-between items-center mb-4">
+    <div className="grid grid-cols-1 gap-8 md:grid-cols-2">
+      <div className="p-6 rounded-lg shadow-lg bg-secondary">
+        <div className="flex items-center justify-between mb-4">
             <h3 className="text-xl font-semibold text-highlight">Sales Chart</h3>
             <div className="flex items-center space-x-2 text-sm">
                 <label htmlFor="startDate">From:</label>
-                <input type="date" id="startDate" value={startDate.toISOString().split('T')[0]} onChange={e => setStartDate(new Date(e.target.value))} className="bg-primary p-1 rounded text-text-primary"/>
+                <input type="date" id="startDate" value={startDate.toISOString().split('T')[0]} onChange={e => setStartDate(new Date(e.target.value))} className="p-1 rounded bg-primary text-text-primary"/>
                 <label htmlFor="endDate">To:</label>
-                <input type="date" id="endDate" value={endDate.toISOString().split('T')[0]} onChange={e => setEndDate(new Date(e.target.value))} className="bg-primary p-1 rounded text-text-primary"/>
+                <input type="date" id="endDate" value={endDate.toISOString().split('T')[0]} onChange={e => setEndDate(new Date(e.target.value))} className="p-1 rounded bg-primary text-text-primary"/>
             </div>
         </div>
-        <Line data={lineData} options={lineOptions} />
+        <div style={{ height: '300px' }}>
+          <Line data={lineData} options={lineOptions} />
+        </div>
       </div>
-      <div className="bg-secondary p-6 rounded-lg shadow-lg">
-        <Bar data={barData} options={barOptions} />
+      <div className="p-6 rounded-lg shadow-lg bg-secondary">
+        <h3 className="mb-4 text-xl font-semibold text-highlight">Bar Chart Example</h3>
+        <div style={{ height: '300px' }}>
+          <Bar data={barData} options={barOptions} />
+        </div>
       </div>
-      <div className="bg-secondary p-6 rounded-lg shadow-lg">
-        <Pie data={pieData} options={pieOptions} />
+      <div className="p-6 rounded-lg shadow-lg bg-secondary">
+        <h3 className="mb-4 text-xl font-semibold text-highlight">Pie Chart Example</h3>
+        <div style={{ height: '400px' }}>
+          <Pie data={pieData} options={pieOptions} />
+        </div>
       </div>
-      <div className="bg-secondary p-6 rounded-lg shadow-lg">
-        <h3 className="text-xl font-semibold text-highlight mb-4">Geography Chart</h3>
-        <Chart
-          chartType="GeoChart"
-          width="100%"
-          height="400px"
-          data={geoData}
-          options={geoOptions}
-        />
+      <div className="p-6 rounded-lg shadow-lg bg-secondary">
+        <h3 className="mb-4 text-xl font-semibold text-highlight">Geography Chart</h3>
+        <div style={{ height: '400px' }} className="overflow-x-hidden">
+          <Chart
+            chartType="GeoChart"
+            width="100%"
+            height="100%"
+            data={geoData}
+            options={geoOptions}
+          />
+        </div>
       </div>
     </div>
   );

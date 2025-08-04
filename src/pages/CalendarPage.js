@@ -58,7 +58,7 @@ const CalendarPage = () => {
   }
 
   return (
-    <div className="p-4">
+    <div className={`p-4 ${theme === 'dark' ? 'bg-gray-800' : 'bg-gray-100'}`}>
       <h2 className="text-2xl font-bold mb-4 text-text-primary">Calendar</h2>
       <div className="bg-secondary p-6 rounded-lg shadow-md">
         <div className="flex justify-between items-center mb-4">
