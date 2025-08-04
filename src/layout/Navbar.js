@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { FaBell, FaCog, FaUser, FaSun, FaMoon } from 'react-icons/fa';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContext';
@@ -7,10 +7,25 @@ import { ThemeContext } from '../context/ThemeContext';
 const Navbar = () => {
   const [showNotifications, setShowNotifications] = useState(false);
   const [showProfileMenu, setShowProfileMenu] = useState(false);
+  const [notifications, setNotifications] = useState([
+    { id: 1, message: 'New message from John Doe.' },
+    { id: 2, message: 'Your report is ready.' },
+    { id: 3, message: '5 new users registered.' },
+  ]);
+  const [unreadNotifications, setUnreadNotifications] = useState(true);
+
   const location = useLocation();
   const navigate = useNavigate();
   const { logout } = useContext(AuthContext);
   const { theme, toggleTheme } = useContext(ThemeContext);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setNotifications(prev => [...prev, { id: 4, message: 'New order received.' }]);
+      setUnreadNotifications(true);
+    }, 5000);
+    return () => clearTimeout(timer);
+  }, []);
 
   const getPageTitle = () => {
     switch (location.pathname) {
@@ -44,6 +59,7 @@ const Navbar = () => {
   const toggleNotifications = () => {
     setShowNotifications(!showNotifications);
     setShowProfileMenu(false); // Close profile menu if open
+    setUnreadNotifications(false);
   };
 
   const toggleProfileMenu = () => {
@@ -62,18 +78,26 @@ const Navbar = () => {
         <div className="text-2xl font-bold font-serif">
           {getPageTitle()}
         </div>
+        <div className="relative flex items-center">
+          <input
+            type="text"
+            placeholder="Search..."
+            className="w-64 px-4 py-2 text-sm rounded-md bg-primary text-text-primary focus:outline-none focus:ring-2 focus:ring-accent"
+          />
+        </div>
         <div className="relative flex items-center space-x-6">
           <button onClick={toggleTheme} className="text-2xl cursor-pointer hover:text-highlight transition-colors duration-200">
             {theme === 'dark' ? <FaSun /> : <FaMoon />}
           </button>
           <div className="relative">
             <FaBell className="text-2xl cursor-pointer hover:text-highlight transition-colors duration-200" onClick={toggleNotifications} />
+            {unreadNotifications && <span className="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full"></span>}
             {showNotifications && (
               <div className="absolute right-0 z-50 w-64 py-2 mt-2 rounded-md shadow-lg bg-primary text-text-primary">
                 <div className="px-4 py-2 font-bold border-b border-accent">Notifications</div>
-                <div className="px-4 py-2 border-b border-accent hover:bg-accent">New message from John Doe.</div>
-                <div className="px-4 py-2 border-b border-accent hover:bg-accent">Your report is ready.</div>
-                <div className="px-4 py-2 hover:bg-accent">5 new users registered.</div>
+                {notifications.map(notification => (
+                  <div key={notification.id} className="px-4 py-2 border-b border-accent hover:bg-accent">{notification.message}</div>
+                ))}
               </div>
             )}
           </div>

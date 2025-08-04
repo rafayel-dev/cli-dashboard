@@ -1,4 +1,5 @@
 import React from 'react';
+import Papa from 'papaparse';
 
 const TableComponent = () => {
   const data = [
@@ -8,9 +9,25 @@ const TableComponent = () => {
     { id: 4, name: 'Alice Brown', email: 'alice.brown@example.com', role: 'Admin' },
   ];
 
+  const handleExport = () => {
+    const csv = Papa.unparse(data);
+    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement('a');
+    link.href = URL.createObjectURL(blob);
+    link.setAttribute('download', 'user_data.csv');
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   return (
     <div className="bg-secondary p-6 rounded-lg shadow-lg">
-      <h2 className="text-xl font-semibold text-highlight mb-4">User Data</h2>
+      <div className="flex justify-between items-center mb-4">
+        <h2 className="text-xl font-semibold text-highlight">User Data</h2>
+        <button onClick={handleExport} className="px-4 py-2 text-sm font-medium rounded-md bg-highlight text-primary hover:bg-opacity-80">
+          Export to CSV
+        </button>
+      </div>
       <div className="overflow-x-auto">
         <table className="min-w-full bg-secondary">
           <thead>

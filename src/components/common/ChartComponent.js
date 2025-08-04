@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Line, Bar, Pie } from 'react-chartjs-2';
 import {
   Chart as ChartJS,
@@ -29,16 +29,35 @@ ChartJS.register(
 
 const ChartComponent = () => {
   const { theme } = useContext(ThemeContext);
+  const [startDate, setStartDate] = useState(new Date('2023-01-01'));
+  const [endDate, setEndDate] = useState(new Date('2023-07-31'));
+
   const textColor = theme === 'dark' ? '#edf2f7' : '#333333';
   const gridColor = theme === 'dark' ? '#4a5568' : '#e2e8f0';
 
+  const monthlySales = [
+    { date: new Date('2023-01-15'), sales: 65 },
+    { date: new Date('2023-02-15'), sales: 59 },
+    { date: new Date('2023-03-15'), sales: 80 },
+    { date: new Date('2023-04-15'), sales: 81 },
+    { date: new Date('2023-05-15'), sales: 56 },
+    { date: new Date('2023-06-15'), sales: 55 },
+    { date: new Date('2023-07-15'), sales: 40 },
+  ];
+
+  const filteredSales = monthlySales.filter(sale => {
+    const saleDate = new Date(sale.date);
+    return saleDate >= startDate && saleDate <= endDate;
+  });
+
+
   // Line Chart Data and Options (existing)
   const lineData = {
-    labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+    labels: filteredSales.map(sale => sale.date.toLocaleString('default', { month: 'long' })),
     datasets: [
       {
         label: 'Sales',
-        data: [65, 59, 80, 81, 56, 55, 40],
+        data: filteredSales.map(sale => sale.sales),
         fill: false,
         borderColor: '#4a5568',
         tension: 0.1,
@@ -207,6 +226,15 @@ const ChartComponent = () => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
       <div className="bg-secondary p-6 rounded-lg shadow-lg">
+        <div className="flex justify-between items-center mb-4">
+            <h3 className="text-xl font-semibold text-highlight">Sales Chart</h3>
+            <div className="flex items-center space-x-2 text-sm">
+                <label htmlFor="startDate">From:</label>
+                <input type="date" id="startDate" value={startDate.toISOString().split('T')[0]} onChange={e => setStartDate(new Date(e.target.value))} className="bg-primary p-1 rounded text-text-primary"/>
+                <label htmlFor="endDate">To:</label>
+                <input type="date" id="endDate" value={endDate.toISOString().split('T')[0]} onChange={e => setEndDate(new Date(e.target.value))} className="bg-primary p-1 rounded text-text-primary"/>
+            </div>
+        </div>
         <Line data={lineData} options={lineOptions} />
       </div>
       <div className="bg-secondary p-6 rounded-lg shadow-lg">

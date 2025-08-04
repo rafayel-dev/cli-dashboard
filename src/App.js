@@ -65,7 +65,7 @@ function AppContent({ isSidebarCollapsed, toggleSidebar }) {
   return (
     <AuthProvider>
       <UserProvider>
-        <div className="flex bg-primary min-h-screen">
+        <div className="flex h-screen bg-primary">
         <Routes>
           <Route path="/login" element={<LoginPage />} />
           <Route 
@@ -77,7 +77,7 @@ function AppContent({ isSidebarCollapsed, toggleSidebar }) {
                     isCollapsed={isSidebarCollapsed} 
                     toggleSidebar={toggleSidebar} 
                   />
-                  <div className="flex-1 flex flex-col">
+                  <div className="flex-1 flex flex-col overflow-y-auto">
                     <Navbar />
                     <main className="flex-grow p-8">
                       <Routes>
@@ -87,7 +87,7 @@ function AppContent({ isSidebarCollapsed, toggleSidebar }) {
                         <Route path="/settings" element={<SettingsPage />} />
                         <Route path="/faq" element={<FAQPage />} />
                         <Route path="/calendar" element={<CalendarPage />} />
-                        <Route path="/team" element={<ManageTeamPage />} />
+                        <Route path="/team" element={<PrivateRoute roles={['admin']}><ManageTeamPage /></PrivateRoute>} />
                         <Route path="/contact" element={<ContactInfoPage />} />
                         <Route path="/profile" element={<ProfilePage />} />
                         <Route path="/tickets" element={<SupportTicketsPage />} />

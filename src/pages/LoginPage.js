@@ -11,7 +11,7 @@ const LoginPage = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (username === 'admin' && password === 'admin') {
-      login();
+      login({ username: 'admin', role: 'admin' });
       navigate('/');
     } else {
       alert('Invalid credentials');
