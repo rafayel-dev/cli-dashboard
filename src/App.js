@@ -23,6 +23,7 @@ import { ThemeProvider } from './context/ThemeContext';
 
 import { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation, useNavigate } from 'react-router-dom';
+import Loader from './components/common/Loader'; // Import the Loader component
 
 function App() {
   return (
@@ -37,6 +38,16 @@ function App() {
 function AppContent() {
   const location = useLocation();
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(true); // Add loading state, set to true for demonstration
+
+  // Example: Simulate loading for 2 seconds
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 700);
+  }, []);
+
+  
 
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState(() => {
     const storedState = localStorage.getItem('sidebarCollapsed');
@@ -68,6 +79,7 @@ function AppContent() {
   return (
     <AuthProvider>
       <UserProvider>
+        {isLoading && <Loader />} {/* Conditionally render the Loader */}
         <div className="flex h-screen bg-primary">
         <Routes>
           <Route path="/login" element={<LoginPage />} />
