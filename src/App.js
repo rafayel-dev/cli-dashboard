@@ -65,7 +65,7 @@ function AppContent({ isSidebarCollapsed, toggleSidebar }) {
   return (
     <AuthProvider>
       <UserProvider>
-        <div className="flex h-screen bg-primary">
+        <div className="flex min-h-screen overflow-y-auto bg-primary">
         <Routes>
           <Route path="/login" element={<LoginPage />} />
           <Route 
@@ -77,7 +77,7 @@ function AppContent({ isSidebarCollapsed, toggleSidebar }) {
                     isCollapsed={isSidebarCollapsed} 
                     toggleSidebar={toggleSidebar} 
                   />
-                  <div className="flex-1 flex flex-col overflow-y-auto">
+                  <div className="flex flex-col flex-1 overflow-y-auto">
                     <Navbar />
                     <main className="flex-grow p-8">
                       <Routes>
