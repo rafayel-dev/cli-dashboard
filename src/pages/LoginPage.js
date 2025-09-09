@@ -3,8 +3,8 @@ import { AuthContext } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 
 const LoginPage = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+  const [username, setUsername] = useState('admin');
+  const [password, setPassword] = useState('admin');
   const { login } = useContext(AuthContext);
   const navigate = useNavigate();
 
@@ -72,4 +72,3 @@ const LoginPage = () => {
 };
 
 export default LoginPage;
-
